@@ -166,15 +166,14 @@ class TwoLayerNet(object):
     val_acc_history = []
 
     for it in xrange(num_iters):
-      batch = np.random.choice(np.arange(num_train), batch_size)
-      X_batch = X[batch]
-      y_batch = y[batch]
-
+        
       #########################################################################
       # TODO: Create a random minibatch of training data and labels, storing  #
       # them in X_batch and y_batch respectively.                             #
       #########################################################################
-      
+      batch = np.random.choice(np.arange(num_train), batch_size)
+      X_batch = X[batch]
+      y_batch = y[batch]
       #########################################################################
       #                             END OF YOUR CODE                          #
       #########################################################################
@@ -189,7 +188,10 @@ class TwoLayerNet(object):
       # using stochastic gradient descent. You'll need to use the gradients   #
       # stored in the grads dictionary defined above.                         #
       #########################################################################
-      pass
+      self.params["W1"] -= learning_rate*grads["W1"]
+      self.params["W2"] -= learning_rate*grads["W2"]
+      self.params["b1"] -= learning_rate*grads["b1"]
+      self.params["b2"] -= learning_rate*grads["b2"]
       #########################################################################
       #                             END OF YOUR CODE                          #
       #########################################################################
@@ -234,7 +236,8 @@ class TwoLayerNet(object):
     ###########################################################################
     # TODO: Implement this function; it should be VERY simple!                #
     ###########################################################################
-    pass
+    scores = self.loss(X)
+    y_pred = np.argmax(scores, axis = 1)
     ###########################################################################
     #                              END OF YOUR CODE                           #
     ###########################################################################
