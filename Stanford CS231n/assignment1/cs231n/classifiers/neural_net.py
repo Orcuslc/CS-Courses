@@ -76,7 +76,9 @@ class TwoLayerNet(object):
     # Store the result in the scores variable, which should be an array of      #
     # shape (N, C).                                                             #
     #############################################################################
-    pass
+    l1_scores = X.dot(W1)+b1
+    activation1_scores = np.maximum(0, l1_scores)
+    scores = activation1_scores.dot(W2)+b2
     #############################################################################
     #                              END OF YOUR CODE                             #
     #############################################################################
@@ -93,7 +95,12 @@ class TwoLayerNet(object):
     # in the variable loss, which should be a scalar. Use the Softmax           #
     # classifier loss.                                                          #
     #############################################################################
-    pass
+    num_train = X.shape[0]
+    scores -= np.max(scores) # normalization
+    expscores = np.exp(scores)
+    probs = expscores/np.sum(expscores, axis = 1, keepdims = True)
+    loss = -np.log(probs[range(num_train), y]).sum()/num_train
+    loss += 0.5*reg*(np.sum(W1*W1)+np.sum(W2*W2))
     #############################################################################
     #                              END OF YOUR CODE                             #
     #############################################################################
@@ -105,7 +112,24 @@ class TwoLayerNet(object):
     # and biases. Store the results in the grads dictionary. For example,       #
     # grads['W1'] should store the gradient on W1, and be a matrix of same size #
     #############################################################################
-    pass
+    dscores = probs
+    dscores[range(num_train), y] -= 1
+    
+    db2 = dscores.sum(axis = 0)/num_train
+    dW2 = activation1_scores.T.dot(dscores)/num_train
+    dactivation1_scores = dscores.dot(W2.T)
+    dl1 = np.zeros_like(l1_scores)
+    dl1[l1_scores > 0] = 1
+    dl1 *= dactivation1_scores
+    
+    db1 = dl1.sum(axis = 0)/num_train
+    dW1 = X.T.dot(dl1)/num_train
+    
+    dW2 += reg*W2
+    dW1 += reg*W1
+    
+    grads["W1"], grads["W2"] = dW1, dW2
+    grads["b1"], grads["b2"] = db1, db2
     #############################################################################
     #                              END OF YOUR CODE                             #
     #############################################################################
@@ -142,14 +166,15 @@ class TwoLayerNet(object):
     val_acc_history = []
 
     for it in xrange(num_iters):
-      X_batch = None
-      y_batch = None
+      batch = np.random.choice(np.arange(num_train), batch_size)
+      X_batch = X[batch]
+      y_batch = y[batch]
 
       #########################################################################
       # TODO: Create a random minibatch of training data and labels, storing  #
       # them in X_batch and y_batch respectively.                             #
       #########################################################################
-      pass
+      
       #########################################################################
       #                             END OF YOUR CODE                          #
       #########################################################################
