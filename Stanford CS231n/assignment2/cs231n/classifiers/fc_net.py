@@ -177,7 +177,17 @@ class FullyConnectedNet(object):
         # beta2, etc. Scale parameters should be initialized to one and shift      #
         # parameters should be initialized to zero.                                #
         ############################################################################
-        pass
+        hidden_dims.insert(0, input_dim)
+        hidden_dims.append(num_classes)
+        for i in xrange(self.num_layers):
+            W = np.random.normal(loc = 0.0, scale = weight_scale, size = (hidden_dims[i], hidden_dims[i+1]))
+            b = np.zeros(hidden_dims[i+1])
+            self.params['W'+str(i+1)] = W
+            self.params['b'+str(i+1)] = b
+        
+        if self.use_batchnorm:
+            gamma = np.zeros(
+            )
         ############################################################################
         #                             END OF YOUR CODE                             #
         ############################################################################
@@ -235,7 +245,8 @@ class FullyConnectedNet(object):
         # self.bn_params[1] to the forward pass for the second batch normalization #
         # layer, etc.                                                              #
         ############################################################################
-        pass
+        if self.use_dropout:
+            
         ############################################################################
         #                             END OF YOUR CODE                             #
         ############################################################################
