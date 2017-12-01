@@ -187,7 +187,7 @@ class FullyConnectedNet(object):
             self.params['b'+str(i+1)] = b
         
         if self.use_batchnorm:
-            for i in range(self.num_layers):
+            for i in range(self.num_layers-1):
                 gamma = np.ones(hidden_dims[i+1])
                 beta = np.zeros(hidden_dims[i+1])
                 self.params['gamma'+str(i+1)] = gamma
@@ -261,7 +261,8 @@ class FullyConnectedNet(object):
             elif self.use_batchnorm:
                 gamma = self.params['gamma'+str(i+1)]
                 beta = self.params['beta'+str(i+1)]
-                pass
+                out, c = affine_batchnorm_relu_forward(out, W, b, gamma, beta, self.bn_params[i])
+                cache.append(c)
             elif self.use_dropout:
                 pass
             else:
@@ -315,7 +316,7 @@ class FullyConnectedNet(object):
             if self.use_batchnorm and self.use_dropout:
                 pass
             elif self.use_batchnorm:
-                pass
+                dx, grads[strW], grads[strb], grads[strgamma], grads[strbeta] = affine_batchnorm_relu_backward(dx, cache[i-1])
             elif self.use_dropout:
                 pass
             else:
