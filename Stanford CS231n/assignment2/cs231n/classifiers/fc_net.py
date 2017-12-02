@@ -264,7 +264,9 @@ class FullyConnectedNet(object):
                 out, c = affine_batchnorm_relu_forward(out, W, b, gamma, beta, self.bn_params[i])
                 cache.append(c)
             elif self.use_dropout:
-                pass
+                out, c = affine_relu_forward(out, W, b)
+                out, dropout_cache = dropout_forward(out, self.dropout_param)
+                cache.append((c, dropout_cache))
             else:
                 out, c = affine_relu_forward(out, W, b)
                 cache.append(c)
@@ -318,7 +320,8 @@ class FullyConnectedNet(object):
             elif self.use_batchnorm:
                 dx, grads[strW], grads[strb], grads[strgamma], grads[strbeta] = affine_batchnorm_relu_backward(dx, cache[i-1])
             elif self.use_dropout:
-                pass
+                dx = dropout_backward(dx, cache[i-1][1])
+                dx, grads[strW], grads[strb] = affine_relu_backward(dx, cache[i-1][0])
             else:
                 dx, grads[strW], grads[strb] = affine_relu_backward(dx, cache[i-1])
             loss += 0.5*self.reg*(self.params[strW]**2).sum()
