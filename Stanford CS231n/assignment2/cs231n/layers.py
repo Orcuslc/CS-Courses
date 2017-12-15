@@ -581,7 +581,12 @@ def spatial_batchnorm_forward(x, gamma, beta, bn_param):
     # version of batch normalization defined above. Your implementation should#
     # be very short; ours is less than five lines.                            #
     ###########################################################################
-    pass
+    C = x.shape[1]
+    mu = np.mean(x, axis = (0, 2, 3), keepdims = True)
+    var = np.var(x, axis = (0, 2, 3), keepdims = True)
+    x_hat = (x-mu)/np.sqrt(var+bn_param.get('eps', 0))
+    out = gamma.reshape(1, C, 1, 1)*x_hat + beta.reshape(1, C, 1, 1)
+    cache = (x, mu, var, x_hat, beta, gamma, bn_param)
     ###########################################################################
     #                             END OF YOUR CODE                            #
     ###########################################################################
@@ -611,7 +616,12 @@ def spatial_batchnorm_backward(dout, cache):
     # version of batch normalization defined above. Your implementation should#
     # be very short; ours is less than five lines.                            #
     ###########################################################################
-    pass
+    x, mu, var, x_hat, beta, gamma, bn_param = cache
+    dbeta = np.sum(dout, axis = (0, 2, 3))
+    dgamma = np.sum(dout*x_hat, axis = (0, 2, 3))
+    eps = bn_param.get('eps', 0)
+    dx = gamma.reshape(1, x.shape[1], 1, 1) * (var+eps)**(-0.5) * (dout - np.mean(dout, axis = (0, 2, 3), keepdims = True)\
+                                         - (x-mu)*(var+eps)**(-1)*np.mean(dout*(x-mu), axis = (0, 2, 3), keepdims = True))
     ###########################################################################
     #                             END OF YOUR CODE                            #
     ###########################################################################
