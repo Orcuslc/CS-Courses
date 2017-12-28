@@ -102,7 +102,17 @@ def rnn_forward(x, h0, Wx, Wh, b):
     # input data. You should use the rnn_step_forward function that you defined  #
     # above. You can use a for loop to help compute the forward pass.            #
     ##############################################################################
-    pass
+    N, T, D = x.shape
+    H = h0.shape[1]
+    h = np.zeros((N, T, H))
+    values = []
+    for i in range(T):
+        X = x[:, i, :]
+        val = h0.dot(Wh)+X.dot(Wx)+b
+        values.append(val)
+        h0 = np.tanh(val)
+        h[:, i, :] = h0
+    cache = [x, h0, Wx, Wh, b, values]
     ##############################################################################
     #                               END OF YOUR CODE                             #
     ##############################################################################
