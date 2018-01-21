@@ -9,6 +9,6 @@ Assignments and projects within CS courses
 - Stanford CS231n, "Convolutional Neural Networks for Visual Recognition" (Spring 2017)
 - Berkeley CS61A, "The Structure and Interpretation of Computer Programs" (Spring 2017)
 - Berkeley CS61C, "Great Ideas in Computer Architecture" (Fall 2014)
+- Stanford CS140e, "Operating Systems" (Winter 2017)
 
 ## The list of courses I want to learn:
-- Stanford CS140, "Operating Systems" (Winter 2017)
