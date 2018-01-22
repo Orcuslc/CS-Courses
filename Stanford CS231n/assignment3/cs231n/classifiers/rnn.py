@@ -145,8 +145,8 @@ class CaptioningRNN(object):
         ## step 3
         if self.cell_type == 'rnn':
             h, cache_rnn = rnn_forward(x, h0, Wx, Wh, b)
-        else:
-            pass
+        elif self.cell_type == 'lstm':
+            h, cache_lstm = lstm_forward(x, h0, Wx, Wh, b)
         ## step 4
         out, cache_temporal = temporal_affine_forward(h, W_vocab, b_vocab)
         ## step 5
@@ -157,8 +157,8 @@ class CaptioningRNN(object):
         ## backward 3
         if self.cell_type == 'rnn':
             dx, dh0, dWx, dWh, db = rnn_backward(dh, cache_rnn)
-        else:
-            pass
+        elif self.cell_type == 'lstm':
+            dx, dh0, dWx, dWh, db = lstm_backward(dh, cache_lstm)
         ## backward 2
         dW_embed = word_embedding_backward(dx, cache_embed)
         ## backward 1
@@ -227,7 +227,22 @@ class CaptioningRNN(object):
         # functions; you'll need to call rnn_step_forward or lstm_step_forward in #
         # a loop.                                                                 #
         ###########################################################################
-        pass
+        h, _ = affine_forward(features, W_proj, b_proj)
+        N, D = features.shape
+        prev_word = self._start*np.ones((N, 1), dtype = np.int32)
+        
+        if self.cell_type == 'lstm':
+            prev_c = np.zeros_like(h)
+        for i in range(1, max_length-1):
+            x, _ = word_embedding_forward(prev_word, W_embed)
+            x = x.reshape((x.shape[0], x.shape[-1]))
+            if self.cell_type == 'rnn':
+                h, _ = rnn_step_forward(x, h, Wx, Wh, b)
+            elif self.cell_type == 'lstm':
+                h, prev_c, _ = lstm_step_forward(x, h, prev_c, Wx, Wh, b)
+            score, _ = affine_forward(h, W_vocab, b_vocab)
+            prev_word = np.argmax(score, axis = 1)
+            captions[:, i] = prev_word
         ############################################################################
         #                             END OF YOUR CODE                             #
         ############################################################################
