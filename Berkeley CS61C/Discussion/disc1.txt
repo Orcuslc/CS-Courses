@@ -1,0 +1,70 @@
+2.1 
+/*
+Get the sum of an array;
+*/
+int foo(int *arr, size_t n) {
+    return n? arr[0]+foo(arr+1, n-1):0;
+}
+
+2.2
+/*
+Get the negative value of the number of zeros in an array;
+*/
+int bar(int *arr, size_t n) {
+    int sum = 0, i;
+    for(i = n; i > 0; i--) {
+        sum += !arr[i-1];
+    }
+    return ~sum + 1;
+}
+
+2.3 
+/*
+Swap x and y (in function), actually does nothing;
+*/
+void baz(int x, int y) {
+    x = x^y;
+    y = x^y;
+    x = x^y;
+}
+
+3.1
+/* Swap the value of two ints outside of the function */
+void swap(int *x, int *y) {
+    *x = *x ^ *y;
+    *y = *x ^ *y;
+    *x = *x ^ *y;
+}
+
+3.2
+/* Increments the value of an int outside of this func by 1 */
+void incr(int *x) {
+    *x++;
+}
+
+3.3 
+/* Return the number of bytes in a string */
+int len(char *s) {
+    int count = 0;
+    while(*(s++)) {
+        count++;
+    }
+    return count;
+}
+
+4.1
+/* Return the sum of all elements */
+int sum(int *summands, size_t n) {
+    int sum = 0;
+    for(int i = 0; i < n; i++) {
+        sum += *(summands+i);
+    }
+    return sum;
+}
+
+4.2
+void increment(char *string, int n) {
+    for(int i = 0; i < n; i++) {
+        (*(string+i))++;
+    }
+}
