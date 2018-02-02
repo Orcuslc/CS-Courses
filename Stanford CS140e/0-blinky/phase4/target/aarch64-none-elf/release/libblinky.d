@@ -1,0 +1,1 @@
+/home/chuan/GitHub/CS/Stanford\ CS140e/assignment0/0-blinky/phase4/target/aarch64-none-elf/release/libblinky.a: /home/chuan/GitHub/CS/Stanford\ CS140e/assignment0/0-blinky/phase4/src/lang_items.rs ext/layout.ld /home/chuan/GitHub/CS/Stanford\ CS140e/assignment0/0-blinky/phase4/build.rs /home/chuan/GitHub/CS/Stanford\ CS140e/assignment0/0-blinky/phase4/src/lib.rs ext/crt0.S
