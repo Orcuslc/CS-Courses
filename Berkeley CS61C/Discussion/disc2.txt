@@ -1,0 +1,54 @@
+1.1 arg: stack; str: stack; arr: static; *str: heap; val: static(CODE...); C: Cstatic(CODE....); (Notice: constant variables are stored in CODE section.)
+
+1.2 
+    1. malloc returns a pointer of type Void*; need type cast.
+    2. if(extra_large) then the space get by the first malloc does not have a pointer point to it, causing memory leak.
+
+1.3
+free_ll(struct ll_node** list) {
+    if(*list) {
+        free_ll(&((*list)->next)));
+        free(*list);
+    }
+}
+
+prepend(struct ll_node** list, int value) {
+    struct ll_node* Node = (struct ll_node*)malloc(sizeof(struct ll_node));
+    Node->value = value;
+    Node->next = *list;
+    *list = Node;
+}
+
+2.1, 2.2
+(a) change arr -> {1, 2, 4, 4, 5, 6, 0}; lb, lh; ; sb, sh;
+(b) t0 -> 0; lw, lb;
+(c) error; lb;
+(d) error; ; sh, sb;
+(e) error; ; sh, sb;
+(f) change arr -> {1, 2, 3, 6, 5, 6, 0}; ; ; sh, sb;
+
+2.3
+(a)
+    slt $t0, $s0, $s1
+    bne $t0, $0, label
+(b)
+    slt $t0, $s1, $s0
+    beq $t0, $0, label
+(c)
+    
+3
+(a) 
+    addiu $s0, $0, 4
+    addiu $s1, $0, 5
+    addiu $s2, $0, 6
+    addu $s3, $s3, $s0
+    addu $s3, $s3, $s1
+    addu $s3, $s3, $s2
+    addiu $s3, $s3, 10
+(b)
+    sw $0, 0($s0)
+    addiu $s1, $0, 2
+    sw $s1, 4($s0)
+    ??
+(c)
+    
