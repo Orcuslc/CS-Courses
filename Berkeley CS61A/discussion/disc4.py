@@ -23,8 +23,8 @@ def eval_tree(tree):
 
 def memory(x, f):
 	def g(h):
-		print()
-		return  
+		print(f(x))
+		return memory(x, h)
 	return g
 
 if __name__ == '__main__':
