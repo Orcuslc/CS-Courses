@@ -96,6 +96,15 @@ int beargit_add(const char* filename) {
 
 int beargit_rm(const char* filename) {
   /* COMPLETE THE REST */
+  FILE* findex = fopen(".beargit/.index", "r");
+  FILE* fnewindex = fopen(".beargit/.newindex", "w");
+  char line[FILENAME_SIZE];
+  while(fgets(line, sizeof(line), findex)) {
+    strtok(line, "\n");
+    if(strcmp(line, filename) != 0) {
+
+    }
+  }
 
   return 0;
 }
@@ -140,7 +149,17 @@ int beargit_commit(const char* msg) {
 
 int beargit_status() {
   /* COMPLETE THE REST */
+  FILE* findex = fopen(".beargit/.index", "r");
+  char line[FILENAME_SIZE];
 
+  fprintf(stdout, "Tracked files:\n\n");
+  int count = 0;
+  while(fgets(line, sizeof(line), findex)) {
+    strtok(line, "\n");
+    fprintf(stdout, "\t%s\n", line);
+    count++;
+  }
+  fprintf(stdout, "\n%d files total\n", count);
   return 0;
 }
 
