@@ -99,13 +99,28 @@ int beargit_rm(const char* filename) {
   FILE* findex = fopen(".beargit/.index", "r");
   FILE* fnewindex = fopen(".beargit/.newindex", "w");
   char line[FILENAME_SIZE];
+  int flag = 1;
   while(fgets(line, sizeof(line), findex)) {
     strtok(line, "\n");
-    if(strcmp(line, filename) != 0) {
-
+    if(strcmp(line, filename) == 0) {
+      flag = 0;
+    }
+    else {
+      fprintf(fnewindex, "%s\n", line);
     }
   }
-
+  if(flag == 1) {
+    fprintf(stderr, "ERROR: File %s not tracked\n",filename);
+    fclose(findex);
+    fclose(fnewindex);
+    fs_rm(".beargit/.newindex");
+    return 3;
+  }
+  else {
+    fclose(findex);
+    fclose(fnewindex);
+    fs_mv(".beargit/.newindex", ".beargit/.index");
+  }
   return 0;
 }
 
