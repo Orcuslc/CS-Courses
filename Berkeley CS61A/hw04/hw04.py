@@ -357,6 +357,7 @@ class centered_interval(interval):
         centered_interval(-1.0, 2.0)
         """
         "*** YOUR CODE HERE ***"
+        super().__init__(c-tol, c+tol)
 
     def make_interval(self, low, high):
         """Returns a centered interval whose bounds are LOW and HIGH."""
@@ -370,6 +371,7 @@ class centered_interval(interval):
         5.0
         """
         "*** YOUR CODE HERE ***"
+        return (self._low+self._high)/2
 
     def tolerance(self):
         """The tolerance of SELF.
@@ -379,6 +381,7 @@ class centered_interval(interval):
         1.0
         """
         "*** YOUR CODE HERE ***"
+        return (self._high-self._low)/2
 
     def __str__(self):
         """A string representation of SELF as center +/- tolerance.
@@ -388,6 +391,7 @@ class centered_interval(interval):
         5.0 +/- 1.0
         """
         "*** YOUR CODE HERE ***"
+        return "{} +/- {}".format(self.center(), self.tolerance())
 
     def __repr__(self):
         """A string represention of a Python expression that will produce SELF.
@@ -395,6 +399,7 @@ class centered_interval(interval):
         centered_interval(5.0, 1.0)
         """
         "*** YOUR CODE HERE ***"
+        return "centered_interval({}, {})".format(self.center(), self.tolerance())
 
 
 ###################
