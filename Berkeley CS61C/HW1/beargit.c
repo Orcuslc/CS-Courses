@@ -242,6 +242,20 @@ int beargit_status() {
 
 int beargit_log() {
   /* COMPLETE THE REST */
-
+  char commit_id[COMMIT_ID_SIZE];
+  read_string_from_file(".beargit/.prev", commit_id, COMMIT_ID_SIZE);
+  const char init_id[COMMIT_ID_SIZE] = "0000000000000000000000000000000000000000";
+  if(strcmp(commit_id, init_id) == 0) {
+    fprintf(stderr, "%s\n", "ERROR: There are no commits!");
+    return 3;
+  }
+  while(strcmp(commit_id, init_id) != 0) {
+    printf("\ncommit %s\n", commit_id);
+    char msg[MSG_SIZE];
+    read_string_from_file(join(join(".beargit/", commit_id), "/.msg"), msg, MSG_SIZE);
+    printf("\t%s\n", msg);
+    read_string_from_file(join(join(".beargit/", commit_id), "/.prev"), commit_id, COMMIT_ID_SIZE);
+  }
+  printf("\n");
   return 0;
 }
