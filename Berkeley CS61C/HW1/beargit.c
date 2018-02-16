@@ -134,11 +134,61 @@ const char* go_bears = "GO BEARS!";
 
 int is_commit_msg_ok(const char* msg) {
   /* COMPLETE THE REST */
+  int index = 0;
+  while(*msg) {
+    if(*msg == *(go_bears+index)) {
+      index++;
+    }
+    else {
+      index = 0;
+    }
+    if(index == 9) {
+      return 1;
+    }
+    msg++;
+  }
   return 0;
 }
 
 void next_commit_id(char* commit_id) {
   /* COMPLETE THE REST */
+  int carry = 1;
+  char* original = commit_id;
+  while(*commit_id) {
+    if(*commit_id == '0') {
+      *commit_id = '1';
+    }
+    if(carry != 0) {
+      if(*commit_id == '1') {
+        *commit_id = '6';
+        carry = 0;
+      }
+      else if(*commit_id == '6') {
+        *commit_id = 'c';
+        carry = 0;
+      }
+      else if(*commit_id == 'c'){
+        *commit_id = '1';
+        carry = 1;
+      }
+    }
+    commit_id++;
+  }
+  commit_id = original;
+}
+
+char* join(char* a, char* b) {
+  char* c = (char*)malloc(strlen(a)+strlen(b)+1);
+  char* tmpc = c, *tmpa = a, *tmpb = b;
+  while(*a != '\0') {
+    *c++ = *a++;
+  }
+  while(*b != '\0') {
+    *c++ = *b++;
+  }
+  a = tmpa;
+  b = tmpb;
+  return tmpc;
 }
 
 int beargit_commit(const char* msg) {
@@ -152,6 +202,12 @@ int beargit_commit(const char* msg) {
   next_commit_id(commit_id);
 
   /* COMPLETE THE REST */
+  fs_mkdir(join(".beargit/", commit_id));
+  fs_cp(".beargit/.index", join(join(".beargit/", commit_id), "/.index"));
+  fs_cp(".beargit/.prev", join(join(".beargit/", commit_id), "/.prev"));
+
+  write_string_to_file(join(join(".beargit/", commit_id), "/.msg"), msg);
+  write_string_to_file(".beargit/.prev", commit_id);
 
   return 0;
 }
