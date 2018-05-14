@@ -1,0 +1,15 @@
+1.
+    1. 147, 0x93; 54189, 0b 1101 0011 1010 1101; 0b0011 1111, 0x3F; 36, 0x24; etc
+    2. 64Ki, 16Gi, 128Mi, etc
+    3. 2^11, 2^58, 2^19, etc
+2.
+    1. 127, -128
+    2. 0000 0000, 0000 0001, 1111 1111
+    3. 0001 0001, 1110 1111
+    4. 255
+    5. if the first bit of x is 0: \bar{x} = -128+(127-x) = -x-1; if the first bit is 1: x = -128+y, then \bar{x} = 127-y;
+    6. base 16; easy to write and compute and easy to transform to other bases.
+3.
+    1. 2 bit (from entropy)
+    2. 40\log(3)
+    3. 0 bit (does not contain information)
