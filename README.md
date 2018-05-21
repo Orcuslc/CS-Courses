@@ -2,7 +2,7 @@
 The record of CS courses I have taken
 
 ## Courses I have finished:
-- [Stanford CS231n, "Convolutional Neural Networks for Visual Recognition" (Spring 2017)](http://cs231n.stanford.edu/)
+- [Stanford CS231n, "Convolutional Neural Networks for Visual Recognition" (Spring 2017)](http://cs231n.stanford.edu/2017/)
 
 
 ## Courses I am taking:
