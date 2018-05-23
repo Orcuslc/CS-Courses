@@ -1,0 +1,10 @@
+1.1
+
+Pair('+', Pair(Pair(1, Pair(2, nil)), Pair('-', Pair(3, Pair(4, nil)))))
+
+Pair('+', Pair(Pair('*', Pair(2, Pair(3, nil))), Pair(4, nil)))
+
+(+ 1 2 3 4)
+
+(+ 1 (* 2 3))
+
