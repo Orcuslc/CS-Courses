@@ -1,0 +1,158 @@
+\documentclass{article}%
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{amsfonts}%
+\usepackage{amssymb}
+\usepackage{geometry}
+\geometry{a4paper, scale = 0.8}
+
+\begin{document}
+\begin{center}
+\textbf{Homework 2}\bigskip
+\end{center}
+\begin{enumerate}
+\item Exercise 2.28
+
+For $n = 1$, $x_1 \ge 0 $.
+
+For $n = 2$, it requires $x_1 \ge 0  $ and $\det(A) \ge 0$, which means $x_1x_3-x_2^2 \ge 0 $.
+
+For $n = 3$, $\det(A_1), \det(A_2), \det(A) \ge 0$, where $\det(A_i)$ is the $i^{th} $ leading principle minor. So $x_1 \ge 0 $, $x_1x_4-x_2^2 \ge 0 $, $x_1x_4x_6+2x_2x_3x_5-x_1x_5^2-x_2^2x_6-x_3^2x_4 \ge 0 $.
+
+\item Exercise 2.33
+
+\textbf{(a)} 
+i) For $x, y\in K_{m+} $, since $x_1\ge x_2\ge \cdots \ge x_n\ge 0 $, $y_1\ge \cdots\ge y_n \ge 0 $, for each $0 \le \theta \le 1$, $\theta x_1 + (1-\theta) y_1 \ge \cdots\ge \theta x_n + (1-\theta)y_n\ge 0 $. Hence $K_{m+} $ is convex.
+
+ii) We know $K_{m+} $ is closed because $\ge$ in $\mathbb{R}$ is preserved by limits.
+
+iii) For $x = \{\frac{1}{i}\}_{i=1}^{n} \in K_{m+} $, we can pick $r = \frac{1}{2}(\frac{1}{n-1}-\frac{1}{n})$, then $O(x, r) \subset K_{m+} $ in the sense of 2-norm. Hence $K_{m+} $ is solid.
+
+iv) $K_{m+} $ contains no line, because if $0\ne x\in K_{m+} $, then $-x_1 < 0 $, hence $-x\notin K_{m+} $.
+
+\textbf{(b)} 
+By Abel's transformation,
+$$
+S = x^\top y = (x_1-x_2)y_1 + \cdots + (x_{n-1}-x_n)\sum_{j=1}^{n-1}y_j + x_n\sum_{j=1}^{n}y_j\ge 0,
+$$
+for each $x\in K_{m+} $. First, we notice that if the partial sum of $y$, $\sum_{i=1}^{k}y_i\ge 0 $ for each $1\le k \le n$, then $S \ge 0$ since $x_i\ge x_{i+1} $. Now if there is some $y\in K_{m+}^* $ which does not have this property, then there is some $k$, s.t. 
+$$
+\sum_{j=1}^{k}y_j < 0.
+$$
+Now we can pick $x\in K_{m+} $, which satisfies 
+$$
+x_1 = x_2 = \cdots = x_k, ~ x_{k+1} = \cdots = x_n = 0,
+$$
+then
+$$
+S = (x_k-x_{k+1})\sum_{j=1}^{k}y_k < 0, 
+$$
+which makes a contradiction. Hence
+$$
+K_{m+}^* = \{y\in\mathbb{R}^n\mid \sum_{j=1}^{k} y_j \ge 0, 1\le k \le n\}.
+$$
+
+\item Exercise 3.2
+
+1) $f$ cannot be convex. In fact, if we limit $f$ to a line in the rightmost corner of the graph, we may find $f'' < 0$, which means $f$ is not convex there. Hence $f$ is not convex.
+
+$f$ can be quasiconvex since all sublevel sets in the graph are convex.
+
+$f$ cannot be concave or quasiconcave since superlevel sets are not convex.
+
+2) $f$ cannot be convex or quasiconvex, since sublevel sets are not convex.
+
+$f$ can be concave or quasiconcave.
+
+\item Exercise 3.5
+
+\textbf{Proof.} Notice for each $s$, $f(sx)$ is convex in $x$, hence $\int_0^1 f(sx)ds $ is convex. Now let $t = sx$, then 
+$$
+\int_0^1 f(sx)ds = \frac{1}{x}\int_0^x f(t)dt
+$$
+is convex.
+
+\item Exercise 3.6
+
+halfspace: $f$ satisfies $f(ax) = af(x)$ for some $a > 0$.
+
+convex cone: $f$ convex
+
+polyhedron: $f$ piecewise linear 
+
+\item Exercise 3.15
+
+\textbf{(a)} For each fixed $x_0 > 0$, 
+$$
+\lim_{\alpha\to 0}u_{\alpha}(x_0) = \lim_{\alpha\to 0}\frac{x_0^\alpha\log x_0}{1} = \log x_0.
+$$
+
+\textbf{(b)} It is trivial to see $u_\alpha(1) = 0 $, and $u_\alpha $ is monotone increasing w.r.t $x$. Since
+$$
+u_\alpha''(x) = (\alpha-1)x^{\alpha-2} < 0,
+$$
+we can see $u$ is concave.
+
+\item Exercise 3.16
+
+\textbf{(b)} Hessian is the skew unit matrix, which is not positive semidefinite nor negative semidefinite. So $f$ is not convex nor concave. By simple computation we can find $\{x| f(x) \ge \alpha\}$ is convex, so $f$ is quasiconcave.
+
+\textbf{(c)} The hessian is
+$$
+H = [\frac{2}{x_1^3x_2}, \frac{1}{x_1^2x_2^2}; \frac{1}{x_1^2x_2^2}, \frac{1}{x_1x_2^3}] 
+$$
+is positive definite, so $f$ is convex and quasiconvex.
+
+\textbf{(d)} Hessian is 
+$$
+H = [0, \frac{2x_1}{x_2^3}; -\frac{1}{x_2^2}, \frac{2x_1}{x_2^3}]
+$$
+is not positive or negative semidefinite, so $f$ is not convex nor concave. By problem 3.6 we know the sublevel and superlevel sets are halfspaces, so it is quasilinear.
+
+\textbf{(e)} Hessian
+$$
+H = [\frac{2}{x_2}, -\frac{2x_1}{x_2^2}; -\frac{2x_1}{x_2^2}, \frac{3x_1^2}{x_2^3}]
+$$
+is positive definite, so $f$ is convex and quasiconvex.
+
+\item Exercise 3.18(b)
+
+\textbf{Proof.} Considering an arbitrary line in $\textbf{S}^n $, given by $X = Z + tV$, we define $g(t) = f(Z+tV)$ and restrict $g$ to the interval of values of $t$ where $Z+tV \succ 0$. We may suppose $Z\in \textbf{S}_{++}^n $, then
+$$
+g(t) = (\det(Z+tV))^{\frac{1}{n}} = (\det(Z^\frac{1}{2}(I+tZ^{-\frac{1}{2}}VZ^{-\frac{1}{2}})Z^\frac{1}{2}))^\frac{1}{n} = (\det Z)^\frac{1}{n}\prod_{i=1}^{n}(1+t\lambda_i)^\frac{1}{n}
+$$
+where $\lambda_i $ are the eigenvalues of $Z^{-\frac{1}{2}}VZ^{-\frac{1}{2}} $. Therefore, since geometric mean is concave, we know $g$ is concave.
+
+\item Exercise 3.24
+
+\textbf{(f)} Since the random variable $x$ is discrete, we know the sublevel and superlevel set of $quatile(x)$ are convex. Hence it is quasilinear, but not convex or concave.
+
+\textbf{(g)} Similar with (f), since $f$ is discrete, it is not convex nor concave. Since
+$$
+f(p) \ge a \iff \sum_{i=1}^{k}p_i < 0.9,
+$$
+where $k$ is the largest number less than $a$. We know the sum of largest numbers is convex, so the superlevel set is convex. Hence $f$ is quasiconcave.
+
+\textbf{(h)} The minimum width interval should be the form $[a_i, a_j]$, so it is discrete hence not convex nor concave. Since
+$$
+f(p) \ge a \iff \sum_{k=i}^{j}p_k < 0.9
+$$
+for all $i, j$ satisfy $a_j-a_i < a $. This is convex, hence $f$ is quasiconcave.
+
+\item Exercise 3.36
+
+\textbf{(a)} First, if $y\succ 0, 1^\top y = 1 $, then it is trivial that 
+$$
+f^*(y) = \sup_{x}(y^\top x-f(x)) = \sum_{i=1}^{n}y_ix_i - \max(x_i) \le 0,
+$$
+the equality holds iff all $x_i $ are equal. 
+
+Now suppose it is not the case. If $y \nsucceq 0$, suppose $y_1 < 0 $ without loss of generality, then we can pick $x_1 < M$ for $-M$ arbitrary large, and other components of $x$ are all equal to 0, then $f^*(x) = \infty $. 
+
+If $y\succ 0 $ but $1^\top y \ne 1 $, if $1^\top y > 1$ then we can pick $x = t1$ then $f^*(y) = \infty $; if $1^\top y < 1$ then pick $x = -t1$ then $f^*(y) = \infty $. Hence.
+
+\textbf{(d)} For $y\ge 0$, $f^*(y) = (p-1)(y/p)^{p/(p-1)} $, for $y < 0$, $f^*(y) = 0 $. When $p < 0$, $f^*(y) = (p-1)(y/p)^{p/(p-1)} $ for $y < 0$ which is the domain.
+
+
+\end{enumerate}
+\end{document}
