@@ -1,0 +1,145 @@
+\documentclass{article}%
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{amsfonts}%
+\usepackage{amssymb}
+\usepackage{geometry}
+\geometry{a4paper, scale = 0.8}
+
+\begin{document}
+\begin{center}
+\textbf{Homework 3}\bigskip
+\end{center}
+\begin{enumerate}
+\item Exercise 3.42
+
+\textbf{Proof.} This is to show the superlevel sets of $W$ are convex. We know
+$$
+W(x)\ge a\iff |\sum_{i=1}^{n}x_if_i(t) - f_0(t)| \le \epsilon,  \forall 0 \le t < a.
+$$
+Then for $0\le \theta \le 1$, 
+$$
+|(\theta x^1+(1-\theta) x^2)^\top f(t) - f_0(t)| \le \theta|x^{1\top} f(t)-f_0(t)|+(1-\theta)|x^{2\top} f(t)-f_0(t)|\le \epsilon.
+$$
+Hence.
+
+\item Exercise 3.54
+
+\textbf{(a)} By definition
+$$
+f'(x) = \frac{1}{\sqrt{2\pi}}e^{-x^2/2}, ~f''(x) = -\frac{x}{\sqrt{2\pi}}e^{-x^2/2},
+$$
+so
+$$
+f''(x)f(x) = -\frac{x}{2\pi}e^{-x^2/2}\int_{-\infty}^x e^{-t^2/2}dt \le 0 \le f'(x)^2
+$$
+for $x > 0$.
+
+\textbf{(b)} Trivial by mean value inequality if $x$ and $t$ have the same sign. If $xt < 0$, then left side $\ge 0$, and right side $< 0$, so the inequality also holds.
+
+\textbf{(c)} The first inequality is trivial since $\exp(x)$ is monotone increasing. For fixed $x < 0$, since the equality holds for any $x, t$, we can just integrate from $-\infty$ to $x$ and we will get the second inequality.
+
+\textbf{(d)} 
+$$
+f''(x)f(x) \le -\frac{x}{2\pi}e^{-x^2/2}e^{x^2/2}\int_{-\infty}^x e^{-xt}dt = \frac{1}{2\pi}e^{-x^2} = f'(x)^2.
+$$
+
+\item Exercise 3.57
+
+\textbf{Proof.} We need to show for each fixed $y\in\mathbb{R}^n $, $f(X) = y^\top X^{-1}y $ is convex. This can be shown by Example 3.4.
+
+\item Exercise 4.1
+
+\textbf{(a)} $\{(\frac{2}{5}, \frac{1}{5})\}$, $\frac{3}{5}$
+
+\textbf{(b)} unbounded below.
+
+\textbf{(c)} $\{(0, x_2), x_2\ge 1\}$, 0
+
+\textbf{(d)} $\{(\frac{1}{3}, \frac{1}{3})\}$, $\frac{1}{3}$
+
+\textbf{(e)} $\{(\frac{1}{2}, \frac{1}{6})\}$, since $\nabla f_0 $ is perpendicular to the boundary at that point.
+
+\item Exercise 4.4
+
+\textbf{(a)} We may notice, for each fixed $Q_i $, the orbit $\{Q_iQ_j\} $ is just $G$. Hence for any $x\in\mathbb{R}^n $,
+$$
+Q_i\bar{x} = \frac{1}{k}Q_i\sum_{j=1}^{k}Q_jx = \frac{1}{k}\sum_{j=1}^{k}Q_iQ_jx = \frac{1}{k}\sum_{i=1}^{k}Q_i x = \bar{x}.
+$$
+
+\textbf{(b)} Since $f$ is convex,
+$$
+f(\bar{x}) = f(\frac{1}{k}\sum_{i=1}^{k}Q_ix)\le \frac{1}{k}\sum_{i=1}^{k}f(Q_i x) = \frac{1}{k}\sum_{i=1}^{k}f(x) = f(x).
+$$
+
+\textbf{(c)} Suppose $x_0 $ is the optimal point of the problem, then by (a), $\bar{x_0}$ is feasible, and by (b) $f_0(\bar{x_0})\le f_0(x_0) $. So $\bar{x_0}$ is optimal.
+
+\textbf{(d)} By (a), (b), (c), we notice for a minimizer $x_0 $ of this problem,
+$$
+f(\frac{1}{n!}\sum_{P}Px_0)\le f(x_0).
+$$
+But $\frac{1}{n!}\sum_{P}Px_0 = \alpha 1$. Hence.
+
+\item Exercise 4.8
+
+\textbf{(a)} i) If the constraint is not feasible, i.e., $Ax = b$ has no solutions, then the optimal result is $\infty$.
+
+ii) Now let $c = A^\top c_1+c_2 $, where $Ac_2 = 0 $. Then $c^\top x = c_1^\top b + c_2^\top x $. If $c_2 = 0$ then $c^\top x\equiv c_1^\top b $. If $c_2\ne 0 $, then pick $\hat{x} = x-tc_2 $, we have $A\hat{x} = b$ and $c_2^\top \hat{x} = -t|c_2|^2 $, which means it is not bounded below, so the optimal result is $-\infty$.
+
+\textbf{(b)} Let $c = ka+c_1 $, where $c_1^\top a = 0 $. Then $c^\top x = ka^\top x + c_1^\top x $. If $c_1 = 0$, if $k > 0$, pick $x = -ta$, then $a^\top x \le b$ when $t\to-\infty$, and $c^\top x = -kt|a|^2 $ is unbounded below. If $k \le 0$, then $ka^\top x\ge kb $, so $\min f_0 = kb$. If $c_1 \ne 0$, pick $x = ba - tc_1 $ and let $t\to -\infty$, the function is not bounded below.
+
+\textbf{(c)} We can minimize w.r.t. each component seperately. For each $i$, if $c_i > 0  $, then $x_i^* = l_i $; if $c_i = 0 $, then any $l_i\le x_i \le u_i $ is optimal. if $c_i < 0 $, then $x_i^* = u_i $. Hence.
+
+\textbf{(d)} Notice
+$$
+c^\top x\ge \min\{c_i\}1^\top x = \min\{c_i\}.
+$$
+If constraint is replaced, then 
+$$
+c^\top x \ge \min\{0, c_i\}.
+$$
+
+\textbf{(e)} First suppose $c_1\le c_2\le\cdot \le c_n $. Then 
+$$
+c^\top x\ge \sum_{i=1}^{\alpha}c_i.
+$$
+If $\alpha$ is not an integer, 
+$$
+c^\top x\ge \sum_{i=1}^{\lfloor \alpha\rfloor}c_i + (\alpha-\lfloor \alpha\rfloor)c_{\lfloor \alpha\rfloor+1}.
+$$
+If is replaced with inequality, then
+$$
+c^\top x\ge \sum_{i=1}^{k}c_i,
+$$
+where $k$ satisfies $k\le \alpha$ and
+$$
+c_1\le \cdots \le c_k \le 0.
+$$
+
+\item Exercise 4.17
+
+The problem can be written as
+$$
+\begin{aligned}
+&\text{maximize} ~\sum_{i=}^{n}r_j(x_j) \\
+&\text{subject to} ~x\succcurlyeq 0, Ax\preccurlyeq c^{max}
+\end{aligned}
+$$
+This is a convex optimization problem. Notice
+$$
+r_j(x_j) = \min\{p_jx_j, p_jq_j+p_j^{disc}(x_j-q_j)\}.
+$$
+then 
+$$
+r_j(x_j)\ge t \iff p_jx_j\ge t, ~p_jq_j + p_j^{disc}(x_j-q_j)\ge t.
+$$
+Hence the LP should be
+$$
+\begin{aligned}
+&\text{maximize} ~1^\top t \\
+&\text{subject to}~ x\succcurlyeq 0, ~Ax\preccurlyeq c^{max}, ~p_jx_j\ge t_j, ~p_jq_j + p_j^{disc}(x_j-q_j)\ge t_j.
+\end{aligned}
+$$
+
+\end{enumerate}
+\end{document}
